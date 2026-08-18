@@ -282,8 +282,12 @@ export const LMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Theme handling
   const [theme, setThemeState] = useState<'light' | 'dark' | 'system'>(() => {
-    const saved = localStorage.getItem('edupulse_theme');
-    return (saved as 'light' | 'dark' | 'system') || 'light';
+    try {
+      const saved = localStorage.getItem('edupulse_theme');
+      return (saved as 'light' | 'dark' | 'system') || 'light';
+    } catch {
+      return 'light';
+    }
   });
 
   // Toast state
@@ -291,16 +295,20 @@ export const LMSProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Apply theme class to document root
   useEffect(() => {
-    const root = document.documentElement;
-    const isDark =
-      theme === 'dark' ||
-      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    if (isDark) {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+    try {
+      const root = document.documentElement;
+      const isDark =
+        theme === 'dark' ||
+        (theme === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (isDark) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      localStorage.setItem('edupulse_theme', theme);
+    } catch (e) {
+      console.warn('Could not persist theme to localStorage:', e);
     }
-    localStorage.setItem('edupulse_theme', theme);
   }, [theme]);
 
   const setTheme = (newTheme: 'light' | 'dark' | 'system') => {

@@ -128,10 +128,7 @@ const AppContent: React.FC = () => {
       </div>
 
       {/* Global Modals & Notifications */}
-      <GlobalSearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-      />
+      <GlobalSearchModal />
 
       <AuthModal
         isOpen={authModalOpen}

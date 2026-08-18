@@ -37,7 +37,7 @@ export const TeacherDashboard: React.FC = () => {
 
   // New course form
   const [courseTitle, setCourseTitle] = useState('');
-  const [courseSubject, setCourseSubject] = useState('Computer Science');
+  const [courseSubject, setCourseSubject] = useState<Course['subject']>('Computer Science');
   const [courseDesc, setCourseDesc] = useState('');
   const [courseLevel, setCourseLevel] = useState<'Beginner' | 'Intermediate' | 'Advanced'>('Intermediate');
   const [courseThumb, setCourseThumb] = useState('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80');
@@ -176,7 +176,7 @@ export const TeacherDashboard: React.FC = () => {
           value={pendingSubmissions.length.toString()}
           icon={<FileCheck className="w-5 h-5" />}
           subtitle="Requires grading"
-          variant={pendingSubmissions.length > 0 ? 'amber' : 'neutral'}
+          variant={pendingSubmissions.length > 0 ? 'amber' : 'default'}
         />
         <StatCard
           label="Avg Class Score"
@@ -339,14 +339,16 @@ export const TeacherDashboard: React.FC = () => {
               </label>
               <select
                 value={courseSubject}
-                onChange={e => setCourseSubject(e.target.value)}
+                onChange={e => setCourseSubject(e.target.value as Course['subject'])}
                 className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <option value="Computer Science">Computer Science</option>
                 <option value="Mathematics">Mathematics</option>
                 <option value="Physics">Physics</option>
-                <option value="Data Science">Data Science</option>
                 <option value="Biology">Biology</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="English & Literature">English & Literature</option>
+                <option value="Arts & Humanities">Arts & Humanities</option>
               </select>
             </div>
 
