@@ -1,0 +1,6 @@
+{
+  "name": "Student Learning Management System",
+  "description": "Comprehensive Learning Management System (LMS) with student, teacher, and admin portals, course builder, lesson player, quizzes, assignments, grading, analytics, and certificates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
