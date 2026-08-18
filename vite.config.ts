@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(({ mode }) => {
   return {
-    base: process.env.VITE_BASE || './',
+    base: mode === 'development' ? '/' : (process.env.VITE_BASE || '/Lumina-LMS/'),
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

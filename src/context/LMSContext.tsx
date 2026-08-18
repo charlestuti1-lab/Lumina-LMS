@@ -222,7 +222,12 @@ const LMSContext = createContext<LMSContextType | undefined>(undefined);
 function loadFromStorage<T>(key: string, fallback: T): T {
   try {
     const item = localStorage.getItem(`edupulse_${key}`);
-    return item ? JSON.parse(item) : fallback;
+    if (!item) return fallback;
+    const parsed = JSON.parse(item);
+    if (Array.isArray(fallback) && (!Array.isArray(parsed) || parsed.length === 0)) {
+      return fallback;
+    }
+    return parsed;
   } catch (e) {
     console.error(`Error loading ${key} from storage:`, e);
     return fallback;

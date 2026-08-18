@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "lumina-lms",
+  "homepage": "https://charlestuti1-lab.github.io/Lumina-LMS/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
