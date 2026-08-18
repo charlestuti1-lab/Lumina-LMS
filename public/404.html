@@ -5,8 +5,11 @@
     <title>EduPulse | Student Learning Management System</title>
     <script type="text/javascript">
       // GitHub Pages SPA redirect
-      var pathSegmentsToKeep = 0;
+      // Automatically detect if deployed under repository subpath (e.g. username.github.io/repo-name/)
       var l = window.location;
+      var isProjectPage = l.hostname.indexOf('github.io') > -1 && l.pathname.split('/').filter(Boolean).length > 0;
+      var pathSegmentsToKeep = isProjectPage ? 1 : 0;
+
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
         l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
